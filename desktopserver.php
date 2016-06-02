@@ -124,6 +124,9 @@ DS_API_Xfer::log('***returned from process()');
 	 */
 	private function authenticate($user, $pass)
 	{
+		// reset value of ds_deploy directory for (old) XMLRPC API calls
+		$this->ds_deploy = $this->doc_root . '/ds-deploy';
+
 		// Authenticate the user
 		global $wp_xmlrpc_server;
 		if ( !$wp_xmlrpc_server->login( $user, $pass) ) {
@@ -167,7 +170,7 @@ DS_API_Xfer::log('***returned from process()');
 		$pdata = get_plugin_data(__FILE__);
 		$server_details['DS_VERSION'] = $pdata['Version'];
 		$server_details['WP_VERSION'] = $wp_version;
-		$server_details['MAX_UPLOAD'] = wp_max_upload_size(); 
+		$server_details['MAX_UPLOAD'] = wp_max_upload_size();
 
 		// Test for compatible WP_Filesystem availability
 		$fsm = '';
@@ -178,7 +181,7 @@ DS_API_Xfer::log('***returned from process()');
 		} else {
 			if ( isset( $wp_filesystem ) ){
 				if ( isset( $wp_filesystem->method )){
-					$fsm = $wp_filesystem->method;            
+					$fsm = $wp_filesystem->method;
 				}
 			}
 		}
@@ -212,6 +215,7 @@ DS_API_Xfer::log('***returned from process()');
 
 		// Create our temp deployment folder if missing
 		if (!$wp_filesystem->is_dir( $this->ds_deploy ) ) {
+			// first time through. directory doesn't exist so create it and copy database_runner
 			if (!$wp_filesystem->mkdir( $this->ds_deploy ) ) {
 				return 'Error - Cannot create ds-deploy folder. ';
 			}
@@ -219,7 +223,7 @@ DS_API_Xfer::log('***returned from process()');
 			// Precopy our current database_runner.php
 			$wp_filesystem->copy( dirname( __FILE__ ) . '/database_runner.no-execute', $this->ds_deploy . '/database_runner.php' , true );
 			$wp_filesystem->chmod( $this->ds_deploy . '/database_runner.php', FS_CHMOD_FILE );
-		} // TODO: don't we need an else for the is_dir() above so we still copy/chmod files if the directory exists?
+		}
 
 		// Process data chunks using WP_Filesystem where ever possible
 		$temp = $this->ds_deploy . '/temp-ds-deploy';
@@ -253,7 +257,7 @@ DS_API_Xfer::log('***returned from process()');
 
 			// Ignore old database_runner.php and use our new plugin version
 			if ( FALSE === strpos( $file, 'database_runner.php' ) ) {
-				// Create/append data to our file 
+				// Create/append data to our file
 				// (WP_Filesystem get/put would use too much memory for large file appending)
 				$fh = fopen( $file, 'a' );
 				if ( FALSE === $fh ){
@@ -365,7 +369,7 @@ DS_API_Xfer::log('***returned from process()');
 		mysql_select_db( DB_NAME );
 
 		//
-		// *** Set up prerequisite to use phpMyAdmin's SQL Import plugin 
+		// *** Set up prerequisite to use phpMyAdmin's SQL Import plugin
 		//
 
 		if ( FALSE === mysql_query( 'SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";' ) ) {
@@ -626,7 +630,7 @@ DS_API_Xfer::log('***returned from process()');
 // TODO: this should only be done after we know we're running one of the XML RPC commands
 if ((int) @ini_get('memory_limit') < 64) {
     if (FALSE !== strpos(ini_get('disable_functions'), 'ini_set')) {
-        @ini_set('memory_limit', '64M'); 
+        @ini_set('memory_limit', '64M');
     }
 }
 @set_time_limit( 600 );
