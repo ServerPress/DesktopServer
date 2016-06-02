@@ -1,28 +1,46 @@
 === DesktopServer for WordPress ===
-Contributors: steveorevo
-Tags: localhost, isp, hosting, deploy, copy, transfer, publish
+Contributors: steveorevo, davejesch
+Donate link: http://serverpress.com
+Tags: localhost, isp, hosting, deploy, copy, transfer, publish, desktopserver
 Requires at least: 3.0
-Tested up to: 4.3.1
-Stable tag: 1.5.2
+Tested up to: 4.5.2
+Stable tag: 1.6.0
 License: GPLv2 or later
 
 DesktopServer for WordPress
 
 == Description ==
 
-DesktopServer for WordPress eases localhost to live server deployment by publishing hosting provider server details via a protected XML-RPC feed to an authorized administrator only. It also provides assisted deployments to hosting providers that support file system direct.
+DesktopServer for WordPress eases localhost to live server deployment by publishing hosting provider server details via a protected XML-RPC feed and API to an authorized administrator only. It also provides assisted deployments to hosting providers that support file system direct.
 
 == Installation ==
 
 Upload the DesktopServer for WordPress plugin and activate it. Then using DesktopServer's export feature, select Export, followed by the "Fetch live hosting server details" checkbox. For more information, please visit http://serverpress.com/.
 
+== Frequently Asked Questions ==
+
+= Do I have to use this plugin in order to use DesktopServer locally? =
+
+No. The DesktopServer plugin is installed on a live site only when you are ready to deploy your local install to the live site. It is not required for local development.
+
+= After deployment, do I need to keep this plugin active? =
+
+No. Since this is only needed during the deploy process, once deployment is complete this plugin is automatically removed and does not need to be reinstalled.
+
+= Is this secure? =
+
+Yes! The DesktopServer plugin provides information to the DesktopServer application about your live site. But it requires a valid admin login. So as long as you are using secure passwords on your live site, you are secure.
+
 == Changelog ==
+
+= 1.6.0 =
+* Add custom endpoint API as alternate to XMLRPC.
 
 = 1.5.2 =
 * Bump version number.
 
 = 1.5.1 =
-* Accomodate servers that are missing DIR magic constants (bluehost).
+* Accommodate servers that are missing DIR magic constants (bluehost).
 
 = 1.5.0 =
 * Updated MySQL interface to PDO; resolved "Unexpected Response" pertaining to mysql_connect deprecated warnings.
@@ -49,7 +67,9 @@ Upload the DesktopServer for WordPress plugin and activate it. Then using Deskto
 = 1.1.0 =
 * Allow only users with core update capability only
 * Added deployment functionality
-* Re-coded into OPP
+* Re-coded into OOP
+
+== Upgrade Notice ==
 
 = 1.0.0 =
 * Initial release
