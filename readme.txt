@@ -4,7 +4,7 @@ Donate link: http://serverpress.com
 Tags: localhost, isp, hosting, deploy, copy, transfer, publish, desktopserver
 Requires at least: 3.0
 Tested up to: 4.5.2
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 
 DesktopServer for WordPress
@@ -32,6 +32,9 @@ No. Since this is only needed during the deploy process, once deployment is comp
 Yes! The DesktopServer plugin provides information to the DesktopServer application about your live site. But it requires a valid admin login. So as long as you are using secure passwords on your live site, you are secure.
 
 == Changelog ==
+
+= 1.6.1 =
+* reset value of ds_deploy directory for (old) XMLRPC API calls for better backward compatibility
 
 = 1.6.0 =
 * Add custom endpoint API as alternate to XMLRPC.

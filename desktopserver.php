@@ -5,13 +5,13 @@ Plugin URI: http://serverpress.com/products/desktopserver/
 Description: DesktopServer for WordPress eases localhost to live server deployment by publishing hosting provider server details via a protected XML-RPC feed to an authorized administrator only. It also provides assisted deployments to hosting providers that support file system direct. For more information, please visit http://serverpress.com/.
 Author: Stephen Carnam
 Author URI: http://ServerPress.com/
-Version: 1.6.0
+Version: 1.6.1
 Text Domain: desktopserver
 */
 
 /**
  * @package DesktopServer for WordPress
- * @version 1.5.2
+ * @version 1.6.1
  */
 class DesktopServer
 {
