@@ -65,8 +65,8 @@ class DS_API_Xfer
 	private function _authenticate_call()
 	{
 self::log(__METHOD__.'()');
-		$username = isset($_POST['username']) ? $_POST['username'] : '';
-		$password = isset($_POST['password']) ? $_POST['password'] : '';
+		$username = sanitize_user(isset($_POST['username']) ? $_POST['username'] : '');
+		$password = strip_tags(isset($_POST['password']) ? $_POST['password'] : '');
 self::log('user=' . $username . ' pass=' . $password);
 
 		if (!empty($username) && !empty($password)) {
@@ -227,9 +227,9 @@ self::log(__METHOD__.'() cannot create work folder');
 			}
 		}
 
-		$file = isset($_POST['file']) ? $_POST['file'] : NULL;
+		$file = sanitize_file_name(isset($_POST['file']) ? $_POST['file'] : NULL);
 		$contents = isset($_POST['contents']) ? stripslashes($_POST['contents']) : NULL;
-		$chunk = isset($_POST['chunk']) ? intval($_POST['chunk']) : NULL;
+		$chunk = isset($_POST['chunk']) ? absint($_POST['chunk']) : NULL;
 		$size = isset($_POST['size']) ? absint($_POST['size']) : NULL;
 		$target_dir = isset($_POST['dir']) ? $_POST['dir'] : NULL;
 		// if provided and not empty, add the file's directory to where we're placing the file
@@ -323,7 +323,7 @@ self::log(__METHOD__.'() opening file for write: ' . $filename);
 	 */
 	private function _api_filesent_xfer()
 	{
-		$file = isset($_POST['file']) ? $_POST['file'] : NULL;
+		$file = sanitize_file_name(isset($_POST['file']) ? $_POST['file'] : NULL);
 		if (NULL === $file || empty($file))
 			$this->_api_result(self::CODE_MISSING_PARAMETERS, __('Request is missing parameters.', 'desktopserver'));
 

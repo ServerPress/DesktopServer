@@ -5,7 +5,7 @@ Plugin URI: http://serverpress.com/products/desktopserver/
 Description: DesktopServer for WordPress eases localhost to live server deployment by publishing hosting provider server details via a protected XML-RPC feed to an authorized administrator only. It also provides assisted deployments to hosting providers that support file system direct. For more information, please visit http://serverpress.com/.
 Author: Stephen Carnam
 Author URI: http://ServerPress.com/
-Version: 1.6.1
+Version: 1.6.2
 Text Domain: desktopserver
 */
 
@@ -108,7 +108,7 @@ DS_API_Xfer::log('returning!');
 DS_API_Xfer::log('authenticating');
 		// we have a DesktopServer API request
 
-		$action = isset($_POST['action']) ? $_POST['action'] : '';
+		$action = sanitize_key(isset($_POST['action']) ? $_POST['action'] : '');
 		$api = new DS_API_Xfer();
 DS_API_Xfer::log('action: ' . $action);
 		$api->process($action, $this);
