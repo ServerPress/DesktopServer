@@ -3,7 +3,7 @@ Contributors: steveorevo, davejesch
 Donate link: http://serverpress.com
 Tags: localhost, isp, hosting, deploy, copy, transfer, publish, desktopserver
 Requires at least: 3.0
-Tested up to: 4.9.6
+Tested up to: 5.4.1
 Stable tag: 1.6.2
 License: GPLv2 or later
 
