@@ -276,9 +276,9 @@ self::log(' - file still does not exist and running on wpengine');
 			// create a new filesystem object, forcing to use SFTP
 			$args = array(
 				'port' => 2222,
-				'hostname' => 'djesch.wpengine.com',
-				'username' => 'djesch',
-				'password' => 'efRNo_6RPBY8Q_8k7',
+				'hostname' => 'something.wpengine.com',
+				'username' => 'user',
+				'password' => '-password-',
 			);
 			$fs = new WP_Filesystem_SSH2($args);
 self::log(' - created fs instance is ' . get_class($fs));
